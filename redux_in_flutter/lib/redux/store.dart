@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Store<State> extends ChangeNotifier{
+class Store<Action, State> extends ChangeNotifier {
   State _state;
   final State Function(State state, Action action) reducer;
 
-  Store({required State initialState, required this.reducer}) : _state = initialState;
+  Store({required State initialState, required this.reducer})
+      : _state = initialState;
   State get state => _state;
 
-
-  void dispatcher(Action action){
+  void dispatcher(Action action) {
     _state = reducer(state, action);
     notifyListeners();
   }
-
 }
